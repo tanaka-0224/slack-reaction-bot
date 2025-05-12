@@ -7,11 +7,13 @@ const app = new App({
 });
 
 app.message(async ({ message, client }) => {
-  await client.reactions.add({
-    name: "snake",
-    channel: message.channel,
-    timestamp: message.ts,
-  });
+  if (!message.subtype) {
+    await client.reactions.add({
+      name: "snake",
+      channel: message.channel,
+      timestamp: message.ts,
+    });
+  }
 });
 
 (async () => {
